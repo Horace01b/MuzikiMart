@@ -1,11 +1,34 @@
 // src/pages/LandingPage.jsx
-import React from "react";
+import React, { useState } from "react";
 import Header from "../components/Header";
 import HeroSection from "../components/HeroSection";
 import EventCards from "../components/EventCards";
 import Footer from "../components/Footer";
 
 export default function LandingPage() {
+  const [activeFeature, setActiveFeature] = useState(0);
+  
+  const features = [
+    {
+      icon: <svg className="w-8 h-8 text-black" fill="currentColor" viewBox="0 0 24 24"><path d="M12 3v10.55c-.59-.34-1.27-.55-2-.55-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4V7h4V3h-6z"/></svg>,
+      gradient: "from-[#7c3aed] to-[#2dd4bf]",
+      title: "Upload Music",
+      description: "Share your music with the world and build your fanbase"
+    },
+    {
+      icon: <svg className="w-8 h-8 text-white" fill="currentColor" viewBox="0 0 24 24"><path d="M9 11H7v9a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2h-3V5a2 2 0 0 0-2-2H9a2 2 0 0 0-2 2v6z"/></svg>,
+      gradient: "from-[#ff8a66] to-[#ff5173]",
+      title: "Promote Concerts",
+      description: "Create and promote your live events to reach more fans"
+    },
+    {
+      icon: <svg className="w-8 h-8 text-black" fill="currentColor" viewBox="0 0 24 24"><path d="M22 10v6a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2v-6c0-1.1.9-2 2-2h16c1.1 0 2 .9 2 2zm-2 0H4v6h16v-6zM4 6h16v2H4V6z"/></svg>,
+      gradient: "from-[#ffd6c0] to-[#ff8a66]",
+      title: "Sell Tickets",
+      description: "Easy ticket sales with multiple payment options"
+    }
+  ];
+
   return (
     <div className="relative min-h-screen flex flex-col">
       {/* Background image blurred */}
@@ -23,27 +46,61 @@ export default function LandingPage() {
             <h2 className="text-4xl font-bold text-green-800 mb-4">Features</h2>
             <p className="text-green-700 max-w-2xl mx-auto">Discover powerful tools designed for musicians and music lovers</p>
           </div>
-          <div className="grid md:grid-cols-3 gap-8">
-            <div className="frosted rounded-xl p-6 text-center transition-all duration-300 hover:-translate-y-2 hover:shadow-xl animate-fade-in-up">
-              <div className="w-16 h-16 bg-gradient-to-r from-[#7c3aed] to-[#2dd4bf] rounded-full mx-auto mb-4 flex items-center justify-center hover:animate-spin transition-all duration-300">
-                <svg className="w-8 h-8 text-black" fill="currentColor" viewBox="0 0 24 24"><path d="M12 3v10.55c-.59-.34-1.27-.55-2-.55-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4V7h4V3h-6z"/></svg>
+          
+          {/* Desktop Grid */}
+          <div className="hidden md:grid md:grid-cols-3 gap-8">
+            {features.map((feature, index) => (
+              <div key={index} className="frosted rounded-xl p-6 text-center transition-all duration-300 hover:-translate-y-2 hover:shadow-xl animate-fade-in-up">
+                <div className={`w-16 h-16 bg-gradient-to-r ${feature.gradient} rounded-full mx-auto mb-4 flex items-center justify-center hover:animate-spin transition-all duration-300`}>
+                  {feature.icon}
+                </div>
+                <h3 className="text-xl font-semibold text-white mb-2">{feature.title}</h3>
+                <p className="text-white/70">{feature.description}</p>
               </div>
-              <h3 className="text-xl font-semibold text-white mb-2">Upload Music</h3>
-              <p className="text-white/70">Share your music with the world and build your fanbase</p>
+            ))}
+          </div>
+
+          {/* Mobile Carousel */}
+          <div className="md:hidden">
+            <div className="frosted rounded-xl p-6 text-center transition-all duration-300 min-h-[200px]">
+              <div className={`w-16 h-16 bg-gradient-to-r ${features[activeFeature].gradient} rounded-full mx-auto mb-4 flex items-center justify-center transition-all duration-300`}>
+                {features[activeFeature].icon}
+              </div>
+              <h3 className="text-xl font-semibold text-white mb-2">{features[activeFeature].title}</h3>
+              <p className="text-white/70">{features[activeFeature].description}</p>
             </div>
-            <div className="frosted rounded-xl p-6 text-center transition-all duration-300 hover:-translate-y-2 hover:shadow-xl animate-fade-in-up animation-delay-200">
-              <div className="w-16 h-16 bg-gradient-to-r from-[#ff8a66] to-[#ff5173] rounded-full mx-auto mb-4 flex items-center justify-center hover:animate-spin transition-all duration-300">
-                <svg className="w-8 h-8 text-white" fill="currentColor" viewBox="0 0 24 24"><path d="M9 11H7v9a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2h-3V5a2 2 0 0 0-2-2H9a2 2 0 0 0-2 2v6z"/></svg>
-              </div>
-              <h3 className="text-xl font-semibold text-white mb-2">Promote Concerts</h3>
-              <p className="text-white/70">Create and promote your live events to reach more fans</p>
+            
+            {/* Navigation Dots */}
+            <div className="flex justify-center mt-6 gap-2">
+              {features.map((_, index) => (
+                <button
+                  key={index}
+                  onClick={() => setActiveFeature(index)}
+                  className={`w-3 h-3 rounded-full transition-all duration-300 ${
+                    index === activeFeature ? 'bg-white' : 'bg-white/30'
+                  }`}
+                />
+              ))}
             </div>
-            <div className="frosted rounded-xl p-6 text-center transition-all duration-300 hover:-translate-y-2 hover:shadow-xl animate-fade-in-up animation-delay-400">
-              <div className="w-16 h-16 bg-gradient-to-r from-[#ffd6c0] to-[#ff8a66] rounded-full mx-auto mb-4 flex items-center justify-center hover:animate-spin transition-all duration-300">
-                <svg className="w-8 h-8 text-black" fill="currentColor" viewBox="0 0 24 24"><path d="M22 10v6a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2v-6c0-1.1.9-2 2-2h16c1.1 0 2 .9 2 2zm-2 0H4v6h16v-6zM4 6h16v2H4V6z"/></svg>
-              </div>
-              <h3 className="text-xl font-semibold text-white mb-2">Sell Tickets</h3>
-              <p className="text-white/70">Easy ticket sales with multiple payment options</p>
+            
+            {/* Navigation Arrows */}
+            <div className="flex justify-between mt-4">
+              <button
+                onClick={() => setActiveFeature(activeFeature === 0 ? features.length - 1 : activeFeature - 1)}
+                className="p-2 rounded-full bg-white/20 hover:bg-white/30 transition-all"
+              >
+                <svg className="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+                </svg>
+              </button>
+              <button
+                onClick={() => setActiveFeature(activeFeature === features.length - 1 ? 0 : activeFeature + 1)}
+                className="p-2 rounded-full bg-white/20 hover:bg-white/30 transition-all"
+              >
+                <svg className="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                </svg>
+              </button>
             </div>
           </div>
         </section>
