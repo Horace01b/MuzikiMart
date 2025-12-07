@@ -177,3 +177,39 @@ body {
 
 /* small controls */
 .pill { padding: 8px 12px; border-radius: 20px; font-weight:600; }
+
+:root{
+  --muziki-accent: #FF8A66;
+  --muziki-teal: #2dd4bf;
+  --muziki-indigo: #7c3aed;
+}
+
+html,body,#root { height: 100%; }
+
+body {
+  font-family: Inter, ui-sans-serif, system-ui, -apple-system, "Segoe UI",
+    Roboto, "Helvetica Neue", Arial;
+}
+
+/* background hero watermark - using your uploaded image path */
+.hero-watermark {
+  background-image: url('/mnt/data/user-dashboard.webp');
+  background-position: center;
+  background-size: cover;
+  filter: blur(4px) brightness(0.45);
+  transform: scale(1.02);
+}
+
+/* glass / card */
+.glass {
+  background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  border-radius: 14px;
+  border: 1px solid rgba(255,255,255,0.04);
+}
+
+/* small utility */
+.rounded-card { border-radius: 12px; }
+.text-muted { color: rgba(255,255,255,0.65); }
+.small { font-size: 0.85rem; }
