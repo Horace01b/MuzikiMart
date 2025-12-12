@@ -11,7 +11,7 @@ load_dotenv()
 app = Flask(__name__)
 
 # Database configuration
-app.config['SQLALCHEMY_DATABASE_URI'] = os.getenv('DATABASE_URL', 'postgresql://username:password@localhost/muzikimart')
+app.config['SQLALCHEMY_DATABASE_URI'] = os.getenv('DATABASE_URL', 'sqlite:///muzikimart.db')
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.config['SECRET_KEY'] = os.getenv('SECRET_KEY', 'your-secret-key-here')
 
@@ -19,8 +19,9 @@ app.config['SECRET_KEY'] = os.getenv('SECRET_KEY', 'your-secret-key-here')
 db = SQLAlchemy(app)
 migrate = Migrate(app, db)
 
-# Import routes
-from routes import *
+@app.route("/")
+def home():
+    return "MuzikiMart backend is working"
 
 if __name__ == '__main__':
     app.run(debug=True)
