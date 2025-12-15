@@ -13,9 +13,10 @@ import {
 } from "lucide-react";
 import { NavLink } from "react-router-dom";
 import { cn } from "@/lib/utils";
+import logo from "@/assets/muzikimart logo.jpeg";
 
 const navItems = [
-  { icon: LayoutDashboard, label: "Dashboard", path: "/" },
+  { icon: LayoutDashboard, label: "Dashboard", path: "/dashboard" },
   { icon: Music, label: "My Music", path: "/my-music" },
   { icon: Calendar, label: "Events", path: "/events" },
   { icon: ShoppingBag, label: "Merchandise", path: "/merchandise" },
@@ -33,21 +34,24 @@ const Sidebar = ({ isCollapsed, onToggle }) => {
       {/* Logo */}
       <div className="p-6 border-b border-border/50 flex items-center justify-between overflow-hidden">
         <div className={cn(
-          "transition-all duration-300 ease-out",
+          "flex items-center gap-3 transition-all duration-300 ease-out",
           isCollapsed ? "opacity-0 scale-95 w-0" : "opacity-100 scale-100 w-auto"
         )}>
-          <h1 className="text-2xl font-bold whitespace-nowrap">
-            <span className="gradient-text">Muziki</span>
-            <span className="text-foreground">Mart</span>
-          </h1>
-          <p className="text-xs text-muted-foreground mt-1">Artist Dashboard</p>
+          <img src={logo} alt="MuzikiMart Logo" className="w-10 h-10 rounded-md object-cover flex-shrink-0" />
+          <div>
+            <h1 className="text-2xl font-bold whitespace-nowrap">
+              <span className="gradient-text">Muziki</span>
+              <span className="text-foreground">Mart</span>
+            </h1>
+            <p className="text-xs text-muted-foreground mt-1">Connect. Grow. Transform</p>
+          </div>
         </div>
-        <h1 className={cn(
-          "text-2xl font-bold mx-auto transition-all duration-300 ease-out absolute left-1/2 -translate-x-1/2",
+        <div className={cn(
+          "mx-auto transition-all duration-300 ease-out absolute left-1/2 -translate-x-1/2",
           isCollapsed ? "opacity-100 scale-100" : "opacity-0 scale-95"
         )}>
-          <span className="gradient-text">M</span>
-        </h1>
+          <img src={logo} alt="MuzikiMart" className="w-8 h-8 rounded-md object-cover" />
+        </div>
       </div>
 
       {/* Toggle Button */}
