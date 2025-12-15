@@ -1,19 +1,12 @@
 // src/App.jsx
 import React from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import { ThemeProvider } from "./context/ThemeContext";
 import LandingPage from "./pages/LandingPage";
 import Signup from "./pages/Signup";
 import Login from "./pages/Login";
 import FanSignup from "./pages/fans/FanSignup";
 import FanDashboard from "./pages/fans/FanDashboard";
-import DashboardLayout from "./layout/DashboardLayout";
-import UploadMusic from "./pages/UploadMusic";
-import Analytics from "./pages/Analytics";
-import Promotions from "./pages/Promotions";
-import Events from "./pages/Events";
-
-
+import Index from "./pages/Index";
 
 export default function App() {
   return (
@@ -25,16 +18,7 @@ export default function App() {
           <Route path="/login" element={<Login />} />
           <Route path="/fan-signup" element={<FanSignup />} />
           <Route path="/fan-dashboard" element={<FanDashboard />} />
-          <Route path="/dashboard/*" element={
-            <ThemeProvider>
-              <DashboardLayout />
-            </ThemeProvider>
-          }>
-            <Route index element={<UploadMusic />} />
-            <Route path="analytics" element={<Analytics />} />
-            <Route path="promotions" element={<Promotions />} />
-            <Route path="events" element={<Events />} />
-          </Route>
+          <Route path="/dashboard" element={<Index />} />
         </Routes>
       </div>
     </BrowserRouter>
