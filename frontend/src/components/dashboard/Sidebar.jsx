@@ -60,7 +60,7 @@ const Sidebar = ({ isCollapsed, onToggle }) => {
               <span className="gradient-text">Muziki</span>
               <span className="text-foreground">Mart</span>
             </h1>
-            <p className="text-xs text-muted-foreground mt-1">Connect. Grow. Transform</p>
+            <p className="text-xs text-muted-foreground mt-1">Create • Share • Grow</p>
           </div>
         </div>
         <div className={cn(
