@@ -14,6 +14,7 @@ import {
 import { NavLink } from "react-router-dom";
 import { cn } from "@/lib/utils";
 import logo from "@/assets/muzikimart logo.jpeg";
+import { useRef } from "react";
 
 const navItems = [
   { icon: LayoutDashboard, label: "Dashboard", path: "/dashboard" },
@@ -26,6 +27,22 @@ const navItems = [
 ];
 
 const Sidebar = ({ isCollapsed, onToggle }) => {
+  const fileInputRef = useRef(null);
+
+  const handleFileUpload = (event) => {
+    const files = event.target.files;
+    if (files && files.length > 0) {
+      const file = files[0];
+      console.log('Selected file:', file.name);
+      // Here you can add your file upload logic
+      alert(`Selected: ${file.name}`);
+    }
+  };
+
+  const triggerFileUpload = () => {
+    fileInputRef.current?.click();
+  };
+
   return (
     <aside className={cn(
       "fixed left-0 top-0 h-screen glass-card rounded-none border-r border-border/50 flex flex-col z-50 transition-all duration-300 ease-out",
@@ -88,10 +105,20 @@ const Sidebar = ({ isCollapsed, onToggle }) => {
 
       {/* Quick Upload Button */}
       <div className="p-4 border-t border-border/50">
-        <button className={cn(
-          "w-full flex items-center justify-center gap-2 py-3 rounded-lg bg-primary text-primary-foreground font-semibold transition-all duration-300 hover:glow-primary hover:scale-[1.02]",
-          isCollapsed && "px-2"
-        )}>
+        <input
+          ref={fileInputRef}
+          type="file"
+          accept="audio/*,.mp3,.wav,.flac,.m4a,.aac"
+          onChange={handleFileUpload}
+          className="hidden"
+        />
+        <button 
+          onClick={triggerFileUpload}
+          className={cn(
+            "w-full flex items-center justify-center gap-2 py-3 rounded-lg bg-primary text-primary-foreground font-semibold transition-all duration-300 hover:glow-primary hover:scale-[1.02]",
+            isCollapsed && "px-2"
+          )}
+        >
           <Upload className="w-5 h-5 flex-shrink-0" />
           <span className={cn(
             "transition-all duration-300 ease-out overflow-hidden whitespace-nowrap",

@@ -51,7 +51,7 @@ const Index = () => {
           <img 
             src={heroBanner} 
             alt="Music visualization" 
-            className="w-full h-full object-cover"
+            className="w-full h-full object-cover animate-wave"
           />
           <div className="absolute inset-0 bg-gradient-to-r from-background/90 via-background/50 to-transparent" />
           <div className="absolute inset-0 flex items-center p-8">
