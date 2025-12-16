@@ -1,5 +1,6 @@
 // src/pages/fans/FanDashboard.jsx
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { 
   Home, 
   Music, 
@@ -25,6 +26,7 @@ import {
 import logo from '../../assets/muzikimart logo.jpeg';
 
 const FanDashboard = () => {
+  const navigate = useNavigate();
   const [activeTab, setActiveTab] = useState('feed');
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   
@@ -77,7 +79,12 @@ const FanDashboard = () => {
                         ? 'bg-blue-600 text-white shadow-lg shadow-blue-500/25' 
                         : 'hover:bg-gray-800/50 text-gray-300'
                     }`}
-                    onClick={() => setActiveTab(item.toLowerCase())}
+                    onClick={() => {
+                      setActiveTab(item.toLowerCase());
+                      if (item.toLowerCase() === 'discover') {
+                        navigate('/discovery');
+                      }
+                    }}
                   >
                     {item}
                   </button>
@@ -135,6 +142,9 @@ const FanDashboard = () => {
                   onClick={() => {
                     setActiveTab(item.toLowerCase());
                     setIsMobileMenuOpen(false);
+                    if (item.toLowerCase() === 'discover') {
+                      navigate('/discovery');
+                    }
                   }}
                 >
                   {item}
