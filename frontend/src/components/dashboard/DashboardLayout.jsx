@@ -22,7 +22,7 @@ const DashboardLayout = ({ children }) => {
   }, [isCollapsed, isMobile]);
 
   return (
-    <div className="min-h-screen flex w-full">
+    <div className="min-h-screen flex w-full bg-gradient-to-t from-blue-900 to-black">
       <Sidebar isCollapsed={isCollapsed} onToggle={() => setIsCollapsed(!isCollapsed)} />
       <main className={`flex-1 min-h-screen transition-all duration-300 ${isCollapsed ? 'ml-20' : 'ml-64'}`}>
         {children}

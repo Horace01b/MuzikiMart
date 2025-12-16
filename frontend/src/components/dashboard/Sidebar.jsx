@@ -13,9 +13,11 @@ import {
 } from "lucide-react";
 import { NavLink } from "react-router-dom";
 import { cn } from "@/lib/utils";
+import logo from "@/assets/muzikimart logo.jpeg";
+import { useRef } from "react";
 
 const navItems = [
-  { icon: LayoutDashboard, label: "Dashboard", path: "/" },
+  { icon: LayoutDashboard, label: "Dashboard", path: "/dashboard" },
   { icon: Music, label: "My Music", path: "/my-music" },
   { icon: Calendar, label: "Events", path: "/events" },
   { icon: ShoppingBag, label: "Merchandise", path: "/merchandise" },
@@ -25,6 +27,22 @@ const navItems = [
 ];
 
 const Sidebar = ({ isCollapsed, onToggle }) => {
+  const fileInputRef = useRef(null);
+
+  const handleFileUpload = (event) => {
+    const files = event.target.files;
+    if (files && files.length > 0) {
+      const file = files[0];
+      console.log('Selected file:', file.name);
+      // Here you can add your file upload logic
+      alert(`Selected: ${file.name}`);
+    }
+  };
+
+  const triggerFileUpload = () => {
+    fileInputRef.current?.click();
+  };
+
   return (
     <aside className={cn(
       "fixed left-0 top-0 h-screen glass-card rounded-none border-r border-border/50 flex flex-col z-50 transition-all duration-300 ease-out",
@@ -33,21 +51,24 @@ const Sidebar = ({ isCollapsed, onToggle }) => {
       {/* Logo */}
       <div className="p-6 border-b border-border/50 flex items-center justify-between overflow-hidden">
         <div className={cn(
-          "transition-all duration-300 ease-out",
+          "flex items-center gap-3 transition-all duration-300 ease-out",
           isCollapsed ? "opacity-0 scale-95 w-0" : "opacity-100 scale-100 w-auto"
         )}>
-          <h1 className="text-2xl font-bold whitespace-nowrap">
-            <span className="gradient-text">Muziki</span>
-            <span className="text-foreground">Mart</span>
-          </h1>
-          <p className="text-xs text-muted-foreground mt-1">Artist Dashboard</p>
+          <img src={logo} alt="MuzikiMart Logo" className="w-10 h-10 rounded-md object-cover flex-shrink-0" />
+          <div>
+            <h1 className="text-2xl font-bold whitespace-nowrap">
+              <span className="gradient-text">Muziki</span>
+              <span className="text-foreground">Mart</span>
+            </h1>
+            <p className="text-xs text-muted-foreground mt-1">Create • Share • Grow</p>
+          </div>
         </div>
-        <h1 className={cn(
-          "text-2xl font-bold mx-auto transition-all duration-300 ease-out absolute left-1/2 -translate-x-1/2",
+        <div className={cn(
+          "mx-auto transition-all duration-300 ease-out absolute left-1/2 -translate-x-1/2",
           isCollapsed ? "opacity-100 scale-100" : "opacity-0 scale-95"
         )}>
-          <span className="gradient-text">M</span>
-        </h1>
+          <img src={logo} alt="MuzikiMart" className="w-8 h-8 rounded-md object-cover" />
+        </div>
       </div>
 
       {/* Toggle Button */}
@@ -84,10 +105,20 @@ const Sidebar = ({ isCollapsed, onToggle }) => {
 
       {/* Quick Upload Button */}
       <div className="p-4 border-t border-border/50">
-        <button className={cn(
-          "w-full flex items-center justify-center gap-2 py-3 rounded-lg bg-primary text-primary-foreground font-semibold transition-all duration-300 hover:glow-primary hover:scale-[1.02]",
-          isCollapsed && "px-2"
-        )}>
+        <input
+          ref={fileInputRef}
+          type="file"
+          accept="audio/*,.mp3,.wav,.flac,.m4a,.aac"
+          onChange={handleFileUpload}
+          className="hidden"
+        />
+        <button 
+          onClick={triggerFileUpload}
+          className={cn(
+            "w-full flex items-center justify-center gap-2 py-3 rounded-lg bg-primary text-primary-foreground font-semibold transition-all duration-300 hover:glow-primary hover:scale-[1.02]",
+            isCollapsed && "px-2"
+          )}
+        >
           <Upload className="w-5 h-5 flex-shrink-0" />
           <span className={cn(
             "transition-all duration-300 ease-out overflow-hidden whitespace-nowrap",

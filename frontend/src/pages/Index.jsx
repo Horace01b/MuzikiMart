@@ -1,4 +1,5 @@
 import { Headphones, Users, DollarSign, TrendingUp, Bell, Search } from "lucide-react";
+import { useNavigate } from "react-router-dom";
 import DashboardLayout from "@/components/dashboard/DashboardLayout";
 import StatsCard from "@/components/dashboard/StatsCard";
 import ActivityChart from "@/components/dashboard/ActivityChart";
@@ -16,6 +17,8 @@ const stats = [
 ];
 
 const Index = () => {
+  const navigate = useNavigate();
+  
   return (
     <DashboardLayout>
       <div className="p-8">
@@ -48,14 +51,17 @@ const Index = () => {
           <img 
             src={heroBanner} 
             alt="Music visualization" 
-            className="w-full h-full object-cover"
+            className="w-full h-full object-cover animate-wave"
           />
           <div className="absolute inset-0 bg-gradient-to-r from-background/90 via-background/50 to-transparent" />
           <div className="absolute inset-0 flex items-center p-8">
             <div>
               <h2 className="text-2xl font-bold text-foreground mb-2">Your music is trending! 🔥</h2>
               <p className="text-muted-foreground mb-4">"Midnight Dreams" reached 100K plays this week</p>
-              <button className="px-6 py-2.5 rounded-lg bg-primary text-primary-foreground font-semibold hover:glow-primary transition-all">
+              <button 
+                onClick={() => navigate('/analytics')}
+                className="px-6 py-2.5 rounded-lg bg-primary text-primary-foreground font-semibold hover:glow-primary transition-all"
+              >
                 View Analytics
               </button>
             </div>
