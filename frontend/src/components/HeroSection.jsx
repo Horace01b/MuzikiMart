@@ -11,7 +11,7 @@ export default function HeroSection() {
 
   return (
     <section className="relative grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6 lg:gap-8 items-start">
-      {/* Left column - decorative panel / mobile preview */}
+      {/* Left column - Musician Signup and Login Container */}
       <div className="order-2 md:order-1 lg:order-1 flex justify-center lg:justify-start">
         <div className="w-full max-w-sm md:w-80 h-[400px] md:h-[520px] frosted rounded-2xl p-4 md:p-6 shadow-soft-lg relative overflow-hidden transition-all duration-300 hover:-translate-y-2 hover:shadow-xl cursor-pointer animate-fade-in-up">
           {/* floating note */}
