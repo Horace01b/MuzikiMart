@@ -11,6 +11,7 @@ import Login from "./pages/Login";
 import FanSignup from "./pages/fans/FanSignup";
 import FanDashboard from "./pages/fans/FanDashboard";
 import Discovery from "./pages/fans/Discovery";
+import Library from "./pages/fans/Library";
 import Index from "./pages/Index";
 import Events from "./pages/Events";
 import MyMusic from "./pages/MyMusic";
@@ -37,6 +38,7 @@ export default function App() {
               <Route path="/fan-signup" element={<FanSignup />} />
               <Route path="/fan-dashboard" element={<FanDashboard />} />
               <Route path="/discovery" element={<Discovery />} />
+              <Route path="/library" element={<Library />} />
               <Route path="/dashboard" element={<Index />} />
               <Route path="/events" element={<Events />} />
               <Route path="/my-music" element={<MyMusic />} />
